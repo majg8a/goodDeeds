@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16.1-bullseye
+    env_file:
+    - path: ./postgres.env
+    expose:
+      - 5432
+  server:
+    build:
+      context: ./server
+      dockerfile: dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    command: [ sh, -c, "npm run dev" ]
+    env_file:
+    - path: ./server.env
+    expose:
+      - 5000
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8888:80"
+    expose:
+      - 8888
+    env_file:
+    - path: ./pgadmin.env
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    logging:
+      driver: none
