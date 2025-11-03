@@ -36,4 +36,14 @@ export const routes: Routes = [
     data: { authGuardPipe: redirectToLogin },
     resolve: { user: UserService },
   },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
 ];
