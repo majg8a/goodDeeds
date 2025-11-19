@@ -8,6 +8,10 @@ import {
 } from '@angular/fire/auth-guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { UserService } from './services/user.service';
+import { GoodDeedsComponent } from './pages/dashboard/good-deeds/good-deeds.component';
+import { GoodDeedComponent } from './components/good-deed/good-deed.component';
+import { CreateGoodDeedComponent } from './pages/dashboard/create-good-deed/create-good-deed.component';
+import { ShowGoodDeedComponent } from './pages/dashboard/show-good-deed/show-good-deed.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo('/login');
 const redirectToDashboard = () => redirectLoggedInTo('/dashboard');
@@ -32,6 +36,20 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    children: [
+      {
+        path: '',
+        component: GoodDeedsComponent,
+      },
+      {
+        path: 'goodDeed/:id',
+        component: ShowGoodDeedComponent,
+      },
+      {
+        path: 'createGoodDeed/:id',
+        component: CreateGoodDeedComponent,
+      },
+    ],
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectToLogin },
     resolve: { user: UserService },

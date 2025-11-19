@@ -12,7 +12,7 @@ import { filter, map } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService implements Resolve<User> {
-  auth = inject(Auth);
+  private auth = inject(Auth);
   user$ = authState(this.auth).pipe(
     filter((user) => user != null),
     map((user) => user!)

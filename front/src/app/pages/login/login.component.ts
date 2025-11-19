@@ -11,6 +11,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule, NzButtonComponent } from 'ng-zorro-antd/button';
 import { Router, RouterModule } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { ThemeService } from '../../services/theme.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -22,12 +23,12 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
     RouterModule,
   ],
   template: `
-    <div class="w-full h-[100vh] grid place-content-center">
+    <div class="w-full min-h-screen grid bg-bg-base text-text-base transition-all ease-in-out duration-700">
       <form
         action=""
         [formGroup]="form"
         (ngSubmit)="onSubmit()"
-        class="grid lg:w-[30vw] sm:w-[50vw] max-sm:w-[90vw] p-[2vw] gap-[1vw] shadow-lg"
+        class="bg-primary text-text-base grid lg:w-[30vw] sm:w-[50vw] max-sm:w-[90vw] lg:p-[2vw] lg:gap-[1vw] max-lg:p-[4vw] max-lg:gap-[2vw] rounded-lg shadow-lg place-self-center"
       >
         <input
           type="text"
@@ -42,11 +43,27 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
           nz-input
         />
         <button type="submit" nz-button nzType="primary">submit</button>
-        <button type="button" nz-button (click)="onSignInWithGoogle()">
+        <button
+          type="button"
+          class="bg-accent text-white whitespace-nowrap py-2 px-4 rounded"
+          (click)="onSignInWithGoogle()"
+        >
           sign in with google :D
         </button>
-        <button type="button" nz-button routerLink="/register">sign up</button>
+        <button
+          type="button"
+          class="bg-accent text-white whitespace-nowrap py-2 px-4 rounded"
+          routerLink="/register"
+        >
+          sign up
+        </button>
       </form>
+      <button
+        (click)="themeService.toggleTheme()"
+        class="bg-accent text-white whitespace-nowrap py-2 px-4 rounded place-self-end m-[2vw]"
+      >
+        Toggle Theme
+      </button>
     </div>
   `,
   styles: ``,
@@ -56,6 +73,7 @@ export class LoginComponent {
   auth = inject(Auth);
   router = inject(Router);
   notification = inject(NzNotificationService);
+  themeService = inject(ThemeService);
 
   form = new FormGroup({
     email: new FormControl<string>(''),

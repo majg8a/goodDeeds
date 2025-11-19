@@ -6,17 +6,12 @@
   --color-primary: 67 56 202;
   --color-accent: 239 68 68;
   --color-bg-base: 255 255 255;
-  --color-text-base: 17, 24, 39;
+  --color-text-base: 17 24 39;
 }
 
 .dark {
   --color-primary: 165 180 252;
   --color-accent: 252 165 165;
-  --color-bg-base: 17 24 39 !important;
+  --color-bg-base: 17 24 39;
   --color-text-base: 249 250 251;
-}
-
-html,
-body {
-  transition: color 0.3s ease, background-color 0.3s ease;
 }
