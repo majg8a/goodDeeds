@@ -12,6 +12,7 @@ import { GoodDeedsComponent } from './pages/dashboard/good-deeds/good-deeds.comp
 import { GoodDeedComponent } from './components/good-deed/good-deed.component';
 import { CreateGoodDeedComponent } from './pages/dashboard/create-good-deed/create-good-deed.component';
 import { ShowGoodDeedComponent } from './pages/dashboard/show-good-deed/show-good-deed.component';
+import { GoodDeedsByUserComponent } from './pages/dashboard/good-deeds-by-user/good-deeds-by-user.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo('/login');
 const redirectToDashboard = () => redirectLoggedInTo('/dashboard');
@@ -48,6 +49,10 @@ export const routes: Routes = [
       {
         path: 'createGoodDeed/:id',
         component: CreateGoodDeedComponent,
+      },
+      {
+        path: 'goodDeedsByUser/:id',
+        component: GoodDeedsByUserComponent,
       },
     ],
     canActivate: [AuthGuard],

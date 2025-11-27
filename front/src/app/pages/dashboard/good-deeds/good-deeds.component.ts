@@ -10,7 +10,8 @@ import {
   standalone: true,
   imports: [GoodDeedComponent],
   template: `
-    <div class="grid  max-sm:gap-[4vw] lg:gap-[1vw]">
+    <div class="grid  max-lg:gap-[4vw] lg:gap-[1vw]">
+      <h1 class="text-center text-text-base">All the Good Deeds</h1>
       @for (goodDeed of goodDeeds(); track $index) {
       <app-good-deed [goodDeed]="goodDeed"></app-good-deed>
       }

@@ -15,3 +15,10 @@
   --color-bg-base: 17 24 39;
   --color-text-base: 249 250 251;
 }
+
+/* html,body {
+  height: min-content;
+  max-height: min-content;
+  min-height: 100vh;
+  width: min-content;
+} */

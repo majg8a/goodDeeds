@@ -28,7 +28,6 @@ import {
   tap,
 } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { User } from '@angular/fire/auth';
 import { makeUpdater } from '../scripts/makeUpdater';
 
 export interface GoodDeed {
@@ -109,6 +108,38 @@ export class GoodDeedsService {
     )
     .subscribe();
 
+  goodDeedsByUserReqSubject$ = new Subject<string>();
+  goodDeedsByUserReqSub = this.goodDeedsByUserReqSubject$
+    .asObservable()
+    .pipe(
+      switchMap((uid) => {
+        this.updateState('isLoading', true);
+        console.log(uid);
+
+        let baseQuery = query(
+          this.goodDeedsRef,
+          orderBy('createdAt', 'desc'),
+          where('author_uid', '==', uid),
+          limit(this.PAGE_SIZE),
+        );
+
+        return collectionData(baseQuery);
+      }),
+
+      tap((goodDeeds) => {
+        console.log(goodDeeds);
+        
+        this.updateState('goodDeedsByUser', goodDeeds);
+        this.updateState('isLoading', false);
+      }),
+      catchError(() => {
+        this.updateState('isLoading', false);
+        return of([]);
+      }),
+      takeUntilDestroyed()
+    )
+    .subscribe();
+
   async createGoodDeed(description: string, parentId?: string): Promise<void> {
     const authorId = this.author_uid();
 
@@ -146,4 +177,5 @@ export interface GoodDeedsState {
   goodDeeds?: GoodDeed[];
   lastVisibleDoc?: GoodDeed;
   isLoading: boolean;
+  goodDeedsByUser?: GoodDeed[];
 }
