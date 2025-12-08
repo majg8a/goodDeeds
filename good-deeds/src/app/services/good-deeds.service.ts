@@ -120,7 +120,7 @@ export class GoodDeedsService {
           this.goodDeedsRef,
           orderBy('createdAt', 'desc'),
           where('author_uid', '==', uid),
-          limit(this.PAGE_SIZE),
+          limit(this.PAGE_SIZE)
         );
 
         return collectionData(baseQuery);
@@ -128,7 +128,7 @@ export class GoodDeedsService {
 
       tap((goodDeeds) => {
         console.log(goodDeeds);
-        
+
         this.updateState('goodDeedsByUser', goodDeeds);
         this.updateState('isLoading', false);
       }),

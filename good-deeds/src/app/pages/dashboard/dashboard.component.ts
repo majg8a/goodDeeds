@@ -18,7 +18,7 @@ import { GoodDeedsService } from '../../services/good-deeds.service';
         class="bg-primary text-text-base p-4 lg:grid grid-cols-[1fr_min-content_min-content_min-content_min-content] gap-[2vw] max-lg:flex max-lg:flex-wrap"
       >
         <h1 class="text-2xl cursor-pointer" [routerLink]="['/', 'dashboard']">
-          PAY IT FORWARD
+          GOOD DEEDS
         </h1>
         <button
           class="bg-accent text-white whitespace-nowrap py-2 px-4 rounded"

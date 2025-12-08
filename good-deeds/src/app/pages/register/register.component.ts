@@ -27,7 +27,7 @@ import { ThemeService } from '../../services/theme.service';
     <div
       class="w-full min-h-screen grid bg-bg-base text-text-base transition-all ease-in-out duration-700"
     >
-      <h1 class="text-center text-text-base">Register</h1>
+      <h1 class="text-center text-text-base">Register to Good Deeds</h1>
       <form
         action=""
         [formGroup]="form"
