@@ -73,7 +73,7 @@ export class DashboardComponent {
 
   shareGoodDeeds() {
     navigator.clipboard.writeText(
-      `${window.location.origin}/dashboard/goodDeedsByUser/${this.author_uid()}`
+      `${window.location.origin}/#/dashboard/goodDeedsByUser/${this.author_uid()}`
     );
 
     this.notification.success('Success', 'profile url copied!');

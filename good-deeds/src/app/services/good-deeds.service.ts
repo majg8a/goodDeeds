@@ -29,6 +29,7 @@ import {
 } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { makeUpdater } from '../scripts/makeUpdater';
+import { Router } from '@angular/router';
 
 export interface GoodDeed {
   id: string;
@@ -44,6 +45,7 @@ export interface GoodDeed {
 export class GoodDeedsService {
   userService = inject(UserService);
   firestore = inject(Firestore);
+  router = inject(Router);
   goodDeedsRef = collection(this.firestore, 'goodDeeds') as CollectionReference<
     GoodDeed,
     DocumentData
@@ -163,6 +165,8 @@ export class GoodDeedsService {
       };
 
       await setDoc(docRef, newDeed);
+
+      this.router.navigate(['/', 'dashboard']);
     } catch (error) {
       console.error('Error creating Good Deed:', error);
       throw new Error('Failed to save good deed. Check console for details.');
